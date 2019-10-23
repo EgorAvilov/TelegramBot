@@ -1,0 +1,23 @@
+create database postgres
+	with owner postgres;
+
+comment on database postgres is 'default administrative connection database';
+
+create sequence hibernate_sequence;
+
+alter sequence hibernate_sequence owner to postgres;
+
+create table if not exists city
+(
+	id serial not null
+		constraint city_pk
+			primary key,
+	description text not null,
+	name varchar(255) not null
+);
+
+alter table city owner to postgres;
+
+create unique index city_id_uindex
+	on city (id);
+
